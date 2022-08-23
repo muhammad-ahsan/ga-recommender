@@ -16,10 +16,11 @@ COPY swagger ./swagger
 COPY templates ./templates
 COPY src ./src
 
+EXPOSE 5000
 
 # Non production deployment
 CMD ["python", "app.py"]
-EXPOSE 5000
+
 # PRODUCTION DEPLOYMENT
 
 # COPY uwsgi.ini .
