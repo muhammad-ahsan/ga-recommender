@@ -1,4 +1,4 @@
-# Ginkgo Analytics Hackathon - GA Recommender
+# Hackathon 2022 - GA Recommender
 Recommender service for Movie Lens dataset
 
 
