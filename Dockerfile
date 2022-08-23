@@ -10,10 +10,6 @@ COPY Pipfile.lock .
 
 RUN pipenv install --system --deploy --ignore-pipfile
 WORKDIR /usr/src/app
-COPY uwsgi.ini .
-COPY supervisord.conf /etc/supervisor/conf.d/
-
-RUN pip install pipenv uwsgi
 
 COPY app.py ./
 COPY swagger ./swagger
@@ -25,5 +21,9 @@ EXPOSE 5000
 # Non production deployment
 CMD ["python", "app.py"]
 
-# Production deployment
+# PRODUCTION DEPLOYMENT
+
+# COPY uwsgi.ini .
+# COPY supervisord.conf /etc/supervisor/conf.d/
+# RUN pip install pipenv uwsgi
 # CMD ["supervisord", "-n"]
