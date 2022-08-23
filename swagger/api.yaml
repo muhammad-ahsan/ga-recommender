@@ -1,0 +1,65 @@
+openapi: "3.0.0"
+info:
+  version: 1.0.0
+  title: GA Recommender Service - Machine Learning powered Recommendations
+paths:
+  /health:
+    get:
+      summary: Query health of service endpoint
+      operationId: src.utils.health_check
+      tags:
+        - Health's Query
+      responses:
+        200:
+          description: Health of service endpoint
+        default:
+          description: unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+  /render_recommendations:
+    post:
+      summary: Query service endpoint
+      operationId: src.utils.render_recommendations
+      tags:
+        - User's Query
+      parameters:
+        - name: keyword
+          in: query
+          required: true
+          schema:
+            type: string
+      responses:
+        200:
+          description: Response from service endpoint
+        default:
+          description: Recommendations response as json
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Response"
+components:
+  schemas:
+    Response:
+      required:
+        - transaction_id
+        - keyword
+        - list_of_words
+      properties:
+        transaction_id:
+          type: string
+        keyword:
+          type: string
+        list_of_words:
+          type: string
+    Error:
+      required:
+        - code
+        - message
+      properties:
+        code:
+          type: integer
+          format: int32
+        message:
+          type: string
