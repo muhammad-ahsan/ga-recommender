@@ -4,6 +4,7 @@ MAINTAINER Muhammad Ahsan <muhammad.ahsan@gmail.com>
 # Install pipenv and compilation dependencies
 RUN pip install pipenv
 RUN apt-get -q update && apt-get install -y --no-install-recommends gcc supervisor && rm -rf /var/lib/apt/lists/*
+RUN sudo apt install libpython3.8-dev
 
 COPY Pipfile .
 COPY Pipfile.lock .
