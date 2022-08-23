@@ -9,6 +9,7 @@ flask = "*"
 requests = "*"
 jupyter = "*"
 lenskit = "*"
+pandas = "*"
 
 [dev-packages]
 pytest = "*"

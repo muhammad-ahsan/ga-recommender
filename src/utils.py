@@ -18,4 +18,4 @@ def get_winning_recommender() -> RecommendationStrategy:
 
 def render_recommendations():
     recommender = get_winning_recommender()
-    return recommender.get_recommendations()
+    return recommender.recommend().to_json(orient='index')

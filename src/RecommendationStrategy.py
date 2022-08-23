@@ -1,27 +1,46 @@
 import abc
 
+import pandas as pd
+from lenskit.algorithms.basic import Popular
+from lenskit.datasets import ML100K
 
-# TODO Concrete implementation of the Recommender
+
+class MovieRecommendation:
+    def __init__(self, title, release, imdb, score):
+        self.title = title
+        self.release = release
+        self.imdb = imdb
+        self.score = score
+
 
 class RecommendationStrategy(metaclass=abc.ABCMeta):
 
-    # TODO: change the return type to dictionary <movie_reference, rank>
+    def __init__(self):
+        self.ml_dataset = ML100K('ml-100k')
+
     @abc.abstractmethod
-    def get_recommendations(self):
+    def recommend(self) -> pd.DataFrame:
         raise NotImplementedError("WTH! why calling abstract method?")
 
 
 class RecommenderA(RecommendationStrategy):
     def __init__(self):
-        pass
+        super().__init__()
+        self.baseline = Popular().fit(self.ml_dataset.ratings[:-1000])
 
-    def get_recommendations(self):
-        return ["RA_Movie_1", "RA_Movie_2", "RA_Movie_3"]
+    # TODO: fix the hardcoded user. Option 1: match online users with known users based in age, gender and occupation
+    def recommend(self) -> pd.DataFrame:
+        # Hardcode -> User 14 is a scientist
+        recommendations_df = self.baseline.recommend(14, n=20)
+        response = self.ml_dataset.movies.join(recommendations_df.set_index("item"), on="item", how="inner")
+        return response[["title", "release", "imdb", "score"]]
 
 
 class RecommenderB(RecommendationStrategy):
     def __init__(self):
-        pass
+        super().__init__()
+        # TODO: Advanced recommendation model implementation
+        raise NotImplementedError
 
-    def get_recommendations(self):
-        return ["RB_Movie_1", "RB_Movie_2", "RB_Movie_3"]
+    def recommend(self) -> pd.DataFrame:
+        return pd.DataFrame()
