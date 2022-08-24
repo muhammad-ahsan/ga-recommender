@@ -15,7 +15,8 @@ connexion_app.add_api('api.yaml', resolver=RestyResolver('api'))
 @app.route('/', methods=['POST', 'GET'])
 def io_html():
     recommendations = list()
-    recommendations.append(utils.render_recommendations().to_json(orient='index'))
+    recommendations.append(utils.render_recommendations())
+    # recommendations.append(["R1", "R1", "R3"])
     return render_template('recommender-ux.html', hints=recommendations)
 
 
