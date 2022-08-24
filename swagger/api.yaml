@@ -1,7 +1,7 @@
 openapi: "3.0.0"
 info:
   version: 1.0.0
-  title: GA Recommender Service - Machine Learning powered Recommendations
+  title: GA Recommender - Powered by Machine Learning
 paths:
   /health:
     get:
