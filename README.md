@@ -1,8 +1,13 @@
 # Hackathon 2022 - GA Recommender
 Recommender service for Movie Lens dataset
 
+# How to run docker
 
-# Resources
+docker build -t ga-recommender . 
+
+docker run -p 5001:5001 docker.io/library/ga-recommender
+
+# Other Resources
 
 ### Dataset
 https://movielens.org/
