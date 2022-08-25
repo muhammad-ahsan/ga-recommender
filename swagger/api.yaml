@@ -34,6 +34,27 @@ paths:
         200:
           description: Response from service endpoint
         default:
+          description: Recommendations response as dictionary
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Response"
+  /render_recommendations_json:
+    post:
+      summary: Query service endpoint
+      operationId: src.utils.render_recommendations_json
+      tags:
+        - User's Query
+      parameters:
+        - name: keyword
+          in: query
+          required: true
+          schema:
+            type: string
+      responses:
+        200:
+          description: Response from service endpoint
+        default:
           description: Recommendations response as json
           content:
             application/json:

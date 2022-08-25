@@ -7,12 +7,12 @@ from src import utils
 options = {"swagger_ui": True,
            'swagger_url': '/api'}
 
-connexion_app = connexion.FlaskApp(__name__, specification_dir='swagger/', options=options)
-app = connexion_app.app
+connexion_app = connexion.App(__name__, specification_dir='swagger/', options=options)
+
 connexion_app.add_api('api.yaml', resolver=RestyResolver('api'))
 
 
-@app.route('/', methods=['POST', 'GET'])
+@connexion_app.route('/', methods=['POST', 'GET'])
 def io_html():
     recommendations = list()
     recommendations.append(utils.render_recommendations())
@@ -21,4 +21,5 @@ def io_html():
 
 
 if __name__ == '__main__':
-    app.run(port=5000, debug=False)
+    print("Going to run app ...")
+    connexion_app.run(host="0.0.0.0", port=5001, debug=False)
