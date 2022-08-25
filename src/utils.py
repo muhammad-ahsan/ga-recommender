@@ -7,6 +7,7 @@ from src.RecommendationStrategy import RecommendationStrategy, RecommenderA
 
 def health_check():
     """Response handler to api call"""
+    print("Health Check ......")
     return jsonify({'id': uuid.uuid1(), 'message': 'Congratulations! the recommender service is healthy'})
 
 
@@ -17,5 +18,10 @@ def get_winning_recommender() -> RecommendationStrategy:
 
 
 def render_recommendations():
+    recommender = get_winning_recommender()
+    return recommender.recommend()[["title", "score"]].to_dict('dict')
+
+
+def render_recommendations_json():
     recommender = get_winning_recommender()
     return recommender.recommend().to_json(orient='index')
