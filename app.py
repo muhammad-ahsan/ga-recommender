@@ -22,4 +22,4 @@ def io_html():
 
 if __name__ == '__main__':
     print("Going to run app ...")
-    connexion_app.run(host="0.0.0.0", port=5001, debug=False)
+    connexion_app.run(host="0.0.0.0", port=5000, debug=False)
