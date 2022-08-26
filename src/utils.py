@@ -1,3 +1,4 @@
+import json
 import uuid
 
 from flask import jsonify
@@ -19,9 +20,16 @@ def get_winning_recommender() -> RecommendationStrategy:
 
 def render_recommendations():
     recommender = get_winning_recommender()
-    return recommender.recommend()[["title", "score"]].to_dict('dict')
+
+    response = recommender.recommend()[["title", "score"]].to_dict('dict')
+    response["strategy"] = str(recommender.__class__.__name__)
+    return response
 
 
 def render_recommendations_json():
     recommender = get_winning_recommender()
-    return recommender.recommend().to_json(orient='index')
+
+    response = recommender.recommend().to_dict('dict')
+    response["strategy"] = str(recommender.__class__.__name__)
+
+    return json.dumps(response)
