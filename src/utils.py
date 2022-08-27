@@ -8,7 +8,6 @@ from src.RecommendationStrategy import RecommendationStrategy, RecommenderA
 
 def health_check():
     """Response handler to api call"""
-    print("Health Check ......")
     return jsonify({'id': uuid.uuid1(), 'message': 'Congratulations! the recommender service is healthy'})
 
 

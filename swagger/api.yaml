@@ -46,7 +46,7 @@ paths:
       tags:
         - User's Query
       parameters:
-        - name: keyword
+        - name: age
           in: query
           required: true
           schema:
